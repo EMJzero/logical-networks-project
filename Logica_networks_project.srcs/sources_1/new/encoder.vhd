@@ -22,7 +22,7 @@ entity project_reti_logiche is
 end project_reti_logiche;
 
 architecture FSM of project_reti_logiche is
-    type state_type is (STAND_BY, START_UP, S1, S2, S3, DONE);
+    type state_type is (STAND_BY, START_UP_0, START_UP_1, S1_WAIT, S1_COMPUTE, S2, S3, DONE);
     subtype ushort is unsigned(15 downto 0);
     subtype ushorter is unsigned(7 downto 0);
     
@@ -64,7 +64,7 @@ begin
                             state <= STAND_BY;
                             o_en <= '0';
                         else
-                            state <= START_UP;
+                            state <= START_UP_0;
                             o_en <= '1';
                         end if;
                         
@@ -77,8 +77,17 @@ begin
                         o_we <= '0';
                         o_data <= "00000000";
                         
-                    when START_UP =>
-                        state <= S1;
+                    when START_UP_0 =>
+                        state <= START_UP_1;
+                        
+                        o_address <= "00000000" & current_address;
+                        o_done <= '0';
+                        o_en <= '1';
+                        o_we <= '0';
+                        o_data <= "00000000";
+                        
+                    when START_UP_1 =>
+                        state <= S1_WAIT;
                         words_to_process <= i_data;
                         current_address <= std_logic_vector(1 + ushorter(current_address));
                         
@@ -88,29 +97,34 @@ begin
                         o_we <= '0';
                         o_data <= "00000000";
                         
-                    when S1 =>
+                    when S1_WAIT =>
                         if words_to_process = "00000000" then
                             state <= DONE;
                             
                             encoded_data <= "00000000";
-                            
-                            o_we <= '0';
                         else
-                            state <= S2;
-                            
-                            encoded_data(0) <= i_data(4) xor i_data(2);
-                            encoded_data(1) <= i_data(4) xor i_data(3) xor i_data(2);
-                            encoded_data(2) <= i_data(5) xor i_data(3);
-                            encoded_data(3) <= i_data(5) xor i_data(4) xor i_data(3);
-                            encoded_data(4) <= i_data(6) xor i_data(4);
-                            encoded_data(5) <= i_data(6) xor i_data(5) xor i_data(4);
-                            encoded_data(6) <= i_data(7) xor i_data(5);
-                            encoded_data(7) <= i_data(7) xor i_data(6) xor i_data(5);
-                            old_2_bits(0) <= i_data(7);
-                            old_2_bits(1) <= i_data(6);
-                            
-                            o_we <= '1';
-                         end if;         
+                            state <= S1_COMPUTE;
+                        end if;
+                        
+                        o_address <= "00000000" & current_address;
+                        o_done <= '0';
+                        o_en <= '1';
+                        o_we <= '0';
+                        o_data <= "00000000";
+                        
+                    when S1_COMPUTE =>
+                        state <= S2;
+                        
+                        encoded_data(0) <= i_data(4) xor i_data(2);
+                        encoded_data(1) <= i_data(4) xor i_data(3) xor i_data(2);
+                        encoded_data(2) <= i_data(5) xor i_data(3);
+                        encoded_data(3) <= i_data(5) xor i_data(4) xor i_data(3);
+                        encoded_data(4) <= i_data(6) xor i_data(4);
+                        encoded_data(5) <= i_data(6) xor i_data(5) xor i_data(4);
+                        encoded_data(6) <= i_data(7) xor i_data(5);
+                        encoded_data(7) <= i_data(7) xor i_data(6) xor i_data(5);
+                        
+                        o_we <= '1';
                                        
                         o_address <= std_logic_vector(1000 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
                         o_done <= '0';
@@ -123,6 +137,9 @@ begin
                                   (i_data(1) xor old_2_bits(0)) &
                                   (i_data(0) xor old_2_bits(0) xor old_2_bits(1)) &
                                   (i_data(0) xor old_2_bits(1));
+                                  
+                        old_2_bits(0) <= i_data(7);
+                        old_2_bits(1) <= i_data(6);
                         
                     when S2 =>
                         state <= S3;
@@ -134,7 +151,7 @@ begin
                         o_data <= encoded_data;
                         
                     when S3 =>
-                        state <= S1;
+                        state <= S1_WAIT;
                         current_address <= std_logic_vector(1 + ushorter(current_address));
                         words_to_process <= std_logic_vector(ushorter(words_to_process) - 1);
                                         
