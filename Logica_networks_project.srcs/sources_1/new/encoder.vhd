@@ -115,31 +115,31 @@ begin
                     when S1_COMPUTE =>
                         state <= S2;
                         
-                        encoded_data(0) <= i_data(4) xor i_data(2);
-                        encoded_data(1) <= i_data(4) xor i_data(3) xor i_data(2);
-                        encoded_data(2) <= i_data(5) xor i_data(3);
-                        encoded_data(3) <= i_data(5) xor i_data(4) xor i_data(3);
-                        encoded_data(4) <= i_data(6) xor i_data(4);
-                        encoded_data(5) <= i_data(6) xor i_data(5) xor i_data(4);
-                        encoded_data(6) <= i_data(7) xor i_data(5);
-                        encoded_data(7) <= i_data(7) xor i_data(6) xor i_data(5);
+                        encoded_data(7) <= i_data(3) xor i_data(5);
+                        encoded_data(6) <= i_data(3) xor i_data(4) xor i_data(5);
+                        encoded_data(5) <= i_data(2) xor i_data(4);
+                        encoded_data(4) <= i_data(2) xor i_data(3) xor i_data(4);
+                        encoded_data(3) <= i_data(1) xor i_data(3);
+                        encoded_data(2) <= i_data(1) xor i_data(2) xor i_data(3);
+                        encoded_data(1) <= i_data(0) xor i_data(2);
+                        encoded_data(0) <= i_data(0) xor i_data(1) xor i_data(2);
                         
-                        o_we <= '1';
                                        
                         o_address <= std_logic_vector(1000 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
                         o_done <= '0';
                         o_en <= '1';
-                        o_data <= (i_data(3) xor i_data(2) xor i_data(1)) &
-                                  (i_data(3) xor i_data(1)) &
-                                  (i_data(2) xor i_data(1) xor i_data(0)) &
-                                  (i_data(2) xor i_data(0)) &
-                                  (i_data(1) xor i_data(0) xor old_2_bits(0)) &
-                                  (i_data(1) xor old_2_bits(0)) &
-                                  (i_data(0) xor old_2_bits(0) xor old_2_bits(1)) &
-                                  (i_data(0) xor old_2_bits(1));
+                        o_we <= '1';
+                        o_data <= (i_data(7) xor old_2_bits(1)) &
+                            (i_data(7) xor old_2_bits(0) xor old_2_bits(1)) &
+                            (i_data(6) xor old_2_bits(0)) &
+                            (i_data(6) xor i_data(7) xor old_2_bits(0)) &
+                            (i_data(5) xor i_data(7)) &
+                            (i_data(5) xor i_data(6) xor i_data(7)) &
+                            (i_data(4) xor i_data(6)) &
+                            (i_data(4) xor i_data(5) xor i_data(6));
                                   
-                        old_2_bits(0) <= i_data(7);
-                        old_2_bits(1) <= i_data(6);
+                        old_2_bits(0) <= i_data(0);
+                        old_2_bits(1) <= i_data(1);
                         
                     when S2 =>
                         state <= S3;
