@@ -26,16 +26,16 @@ architecture FSM of project_reti_logiche is
     subtype ushort is unsigned(15 downto 0);
     subtype ushorter is unsigned(7 downto 0);
     
-    signal state : state_type := STAND_BY;
+    signal state : state_type;
     
     -- as an alternative it is replaceable with only the 8 bit of the read input
-    signal encoded_data : std_logic_vector (7 downto 0) := (others => '0');
+    signal encoded_data : std_logic_vector (7 downto 0);
     -- index 0 is the newest, index 1 the oldest
-    signal old_2_bits : std_logic_vector (1 downto 0) := (others => '0');
+    signal old_2_bits : std_logic_vector (1 downto 0);
     
     -- it gets extended to 16 bits with "00000000"& and then, when needed, goes through a +1000 and +1001
-    signal current_address : std_logic_vector (7 downto 0) := (others => '0');
-    signal words_to_process : std_logic_vector (7 downto 0) := (others => '0');
+    signal current_address : std_logic_vector (7 downto 0);
+    signal words_to_process : std_logic_vector (7 downto 0);
     
 begin
 
@@ -44,19 +44,25 @@ begin
         
     encoder : process(i_clk)
     begin
-    
-        if i_clk = '1' then
-        
-            if i_rst = '1' then
             
+        if rising_edge(i_clk) then
+                    
+            if i_rst = '1' then
+                
                 state <= STAND_BY;
                 encoded_data <= "00000000";
                 old_2_bits <= "00";
                 current_address <= "00000000";
                 words_to_process <= "00000000";
                 
-            else 
-        
+                o_address <= "0000000000000000";
+                o_done <= '0';
+                o_en <= '0';
+                o_we <= '0';
+                o_data <= "00000000";
+                
+            else
+                    
                 case state is
                 
                     when STAND_BY =>
@@ -68,19 +74,24 @@ begin
                             o_en <= '1';
                         end if;
                         
+                        encoded_data <= "00000000";
                         old_2_bits <= "00";
                         current_address <= "00000000";
                         words_to_process <= "00000000";
                                         
-                        o_address <= "00000000" & current_address;
+                        o_address <= "0000000000000000";
                         o_done <= '0';
                         o_we <= '0';
                         o_data <= "00000000";
                         
                     when START_UP_0 =>
                         state <= START_UP_1;
+                        encoded_data <= "00000000";
+                        old_2_bits <= "00";
+                        current_address <= "00000000";
+                        words_to_process <= "00000000";
                         
-                        o_address <= "00000000" & current_address;
+                        o_address <= "0000000000000000";
                         o_done <= '0';
                         o_en <= '1';
                         o_we <= '0';
@@ -88,6 +99,8 @@ begin
                         
                     when START_UP_1 =>
                         state <= S1_WAIT;
+                        encoded_data <= "00000000";
+                        old_2_bits <= "00";
                         words_to_process <= i_data;
                         current_address <= std_logic_vector(1 + ushorter(current_address));
                         
@@ -100,12 +113,15 @@ begin
                     when S1_WAIT =>
                         if words_to_process = "00000000" then
                             state <= DONE;
-                            
-                            encoded_data <= "00000000";
                         else
                             state <= S1_COMPUTE;
                         end if;
                         
+                        encoded_data <= "00000000";
+                        old_2_bits <= old_2_bits;
+                        words_to_process <= words_to_process;
+                        current_address <= current_address;
+
                         o_address <= "00000000" & current_address;
                         o_done <= '0';
                         o_en <= '1';
@@ -123,6 +139,9 @@ begin
                         encoded_data(2) <= i_data(1) xor i_data(2) xor i_data(3);
                         encoded_data(1) <= i_data(0) xor i_data(2);
                         encoded_data(0) <= i_data(0) xor i_data(1) xor i_data(2);
+                        
+                        words_to_process <= words_to_process;
+                        current_address <= current_address;
                         
                                        
                         o_address <= std_logic_vector(1000 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
@@ -143,6 +162,10 @@ begin
                         
                     when S2 =>
                         state <= S3;
+                        encoded_data <= "00000000";
+                        old_2_bits <= old_2_bits;
+                        words_to_process <= words_to_process;
+                        current_address <= current_address;
                         
                         o_address <= std_logic_vector(1001 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
                         o_done <= '0';
@@ -152,6 +175,8 @@ begin
                         
                     when S3 =>
                         state <= S1_WAIT;
+                        encoded_data <= "00000000";
+                        old_2_bits <= old_2_bits;
                         current_address <= std_logic_vector(1 + ushorter(current_address));
                         words_to_process <= std_logic_vector(ushorter(words_to_process) - 1);
                                         
@@ -189,9 +214,9 @@ begin
                         end if;                    
                         
                 end case;
-            
+                
             end if;
-            
+                                            
         end if;
         
     end process;
