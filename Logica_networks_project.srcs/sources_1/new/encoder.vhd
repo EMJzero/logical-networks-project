@@ -42,180 +42,179 @@ begin
     -- consider moving both of those processes, expecially start, not so much reset, INSIDE encode, to force them to
     -- synchronize with the clock, so that the memory elements can be flip-flops instead of latches!
         
-    encoder : process(i_clk)
+    encoder : process(i_clk, i_rst)
     begin
+                                
+        if i_rst = '1' then
             
+            state <= STAND_BY;
+            encoded_data <= "00000000";
+            old_2_bits <= "00";
+            current_address <= "00000000";
+            words_to_process <= "00000000";
+            
+            o_address <= "0000000000000000";
+            o_done <= '0';
+            o_en <= '0';
+            o_we <= '0';
+            o_data <= "00000000";
+            
+        end if;
+                
         if rising_edge(i_clk) then
-                    
-            if i_rst = '1' then
                 
-                state <= STAND_BY;
-                encoded_data <= "00000000";
-                old_2_bits <= "00";
-                current_address <= "00000000";
-                words_to_process <= "00000000";
-                
-                o_address <= "0000000000000000";
-                o_done <= '0';
-                o_en <= '0';
-                o_we <= '0';
-                o_data <= "00000000";
-                
-            else
-                    
-                case state is
-                
-                    when STAND_BY =>
-                        if i_start = '0' then
-                            state <= STAND_BY;
-                            o_en <= '0';
-                        else
-                            state <= START_UP_0;
-                            o_en <= '1';
-                        end if;
-                        
-                        encoded_data <= "00000000";
-                        old_2_bits <= "00";
-                        current_address <= "00000000";
-                        words_to_process <= "00000000";
-                                        
-                        o_address <= "0000000000000000";
-                        o_done <= '0';
-                        o_we <= '0';
-                        o_data <= "00000000";
-                        
-                    when START_UP_0 =>
-                        state <= START_UP_1;
-                        encoded_data <= "00000000";
-                        old_2_bits <= "00";
-                        current_address <= "00000000";
-                        words_to_process <= "00000000";
-                        
-                        o_address <= "0000000000000000";
-                        o_done <= '0';
+            case state is
+            
+                when STAND_BY =>
+                    if i_start = '0' then
+                        state <= STAND_BY;
+                        o_en <= '0';
+                    else
+                        state <= START_UP_0;
                         o_en <= '1';
-                        o_we <= '0';
-                        o_data <= "00000000";
-                        
-                    when START_UP_1 =>
-                        state <= S1_WAIT;
-                        encoded_data <= "00000000";
-                        old_2_bits <= "00";
-                        words_to_process <= i_data;
-                        current_address <= std_logic_vector(1 + ushorter(current_address));
-                        
-                        o_address <= "00000000" & std_logic_vector(1 + ushorter(current_address));
-                        o_done <= '0';
-                        o_en <= '1';
-                        o_we <= '0';
-                        o_data <= "00000000";
-                        
-                    when S1_WAIT =>
-                        if words_to_process = "00000000" then
-                            state <= DONE;
-                        else
-                            state <= S1_COMPUTE;
-                        end if;
-                        
-                        encoded_data <= "00000000";
-                        old_2_bits <= old_2_bits;
-                        words_to_process <= words_to_process;
-                        current_address <= current_address;
+                    end if;
+                    
+                    encoded_data <= "00000000";
+                    old_2_bits <= "00";
+                    current_address <= "00000000";
+                    words_to_process <= "00000000";
+                                    
+                    o_address <= "0000000000000000";
+                    o_done <= '0';
+                    o_we <= '0';
+                    o_data <= "00000000";
+                    
+                when START_UP_0 =>
+                    state <= START_UP_1;
+                    encoded_data <= "00000000";
+                    old_2_bits <= "00";
+                    current_address <= "00000000";
+                    words_to_process <= "00000000";
+                    
+                    o_address <= "0000000000000000";
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '0';
+                    o_data <= "00000000";
+                    
+                when START_UP_1 =>
+                    state <= S1_WAIT;
+                    encoded_data <= "00000000";
+                    old_2_bits <= "00";
+                    words_to_process <= i_data;
+                    current_address <= std_logic_vector(1 + ushorter(current_address));
+                    
+                    o_address <= "00000000" & std_logic_vector(1 + ushorter(current_address));
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '0';
+                    o_data <= "00000000";
+                    o_data <= "00000000";
+                    
+                when S1_WAIT =>
+                    if words_to_process = "00000000" then
+                        state <= DONE;
+                    else
+                        state <= S1_COMPUTE;
+                    end if;
+                    
+                    encoded_data <= "00000000";
+                    old_2_bits <= old_2_bits;
+                    words_to_process <= words_to_process;
+                    current_address <= current_address;
 
+                    o_address <= "00000000" & current_address;
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '0';
+                    o_data <= "00000000";
+                    
+                when S1_COMPUTE =>
+                    state <= S2;
+                    
+                    encoded_data(7) <= i_data(3) xor i_data(5);
+                    encoded_data(6) <= i_data(3) xor i_data(4) xor i_data(5);
+                    encoded_data(5) <= i_data(2) xor i_data(4);
+                    encoded_data(4) <= i_data(2) xor i_data(3) xor i_data(4);
+                    encoded_data(3) <= i_data(1) xor i_data(3);
+                    encoded_data(2) <= i_data(1) xor i_data(2) xor i_data(3);
+                    encoded_data(1) <= i_data(0) xor i_data(2);
+                    encoded_data(0) <= i_data(0) xor i_data(1) xor i_data(2);
+                    
+                    words_to_process <= words_to_process;
+                    current_address <= current_address;
+                    
+                                   
+                    o_address <= std_logic_vector(1000 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '1';
+                    o_data <= (i_data(7) xor old_2_bits(1)) &
+                        (i_data(7) xor old_2_bits(0) xor old_2_bits(1)) &
+                        (i_data(6) xor old_2_bits(0)) &
+                        (i_data(6) xor i_data(7) xor old_2_bits(0)) &
+                        (i_data(5) xor i_data(7)) &
+                        (i_data(5) xor i_data(6) xor i_data(7)) &
+                        (i_data(4) xor i_data(6)) &
+                        (i_data(4) xor i_data(5) xor i_data(6));
+                              
+                    old_2_bits(0) <= i_data(0);
+                    old_2_bits(1) <= i_data(1);
+                    
+                when S2 =>
+                    state <= S3;
+                    encoded_data <= "00000000";
+                    old_2_bits <= old_2_bits;
+                    words_to_process <= words_to_process;
+                    current_address <= current_address;
+                    
+                    o_address <= std_logic_vector(1001 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '1';
+                    o_data <= encoded_data;
+                    
+                when S3 =>
+                    state <= S1_WAIT;
+                    encoded_data <= "00000000";
+                    old_2_bits <= old_2_bits;
+                    current_address <= std_logic_vector(1 + ushorter(current_address));
+                    words_to_process <= std_logic_vector(ushorter(words_to_process) - 1);
+                                    
+                    o_address <= "00000000" & std_logic_vector(1 + ushorter(current_address));
+                    o_done <= '0';
+                    o_en <= '1';
+                    o_we <= '0';
+                    o_data <= "00000000";
+                    
+                when DONE =>
+                    if i_start = '1' then
+                        state <= DONE;
+                        encoded_data <= "00000000";
+                        old_2_bits <= "00";
+                        current_address <= "00000000";
+                        words_to_process <= "00000000";
+                        
+                        o_address <= "00000000" & current_address;
+                        o_done <= '1';
+                        o_en <= '0';
+                        o_we <= '0';
+                        o_data <= "00000000";
+                    else
+                        state <= STAND_BY;
+                        encoded_data <= "00000000";
+                        old_2_bits <= "00";
+                        current_address <= "00000000";
+                        words_to_process <= "00000000";
+                        
                         o_address <= "00000000" & current_address;
                         o_done <= '0';
-                        o_en <= '1';
+                        o_en <= '0';
                         o_we <= '0';
                         o_data <= "00000000";
-                        
-                    when S1_COMPUTE =>
-                        state <= S2;
-                        
-                        encoded_data(7) <= i_data(3) xor i_data(5);
-                        encoded_data(6) <= i_data(3) xor i_data(4) xor i_data(5);
-                        encoded_data(5) <= i_data(2) xor i_data(4);
-                        encoded_data(4) <= i_data(2) xor i_data(3) xor i_data(4);
-                        encoded_data(3) <= i_data(1) xor i_data(3);
-                        encoded_data(2) <= i_data(1) xor i_data(2) xor i_data(3);
-                        encoded_data(1) <= i_data(0) xor i_data(2);
-                        encoded_data(0) <= i_data(0) xor i_data(1) xor i_data(2);
-                        
-                        words_to_process <= words_to_process;
-                        current_address <= current_address;
-                        
-                                       
-                        o_address <= std_logic_vector(1000 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
-                        o_done <= '0';
-                        o_en <= '1';
-                        o_we <= '1';
-                        o_data <= (i_data(7) xor old_2_bits(1)) &
-                            (i_data(7) xor old_2_bits(0) xor old_2_bits(1)) &
-                            (i_data(6) xor old_2_bits(0)) &
-                            (i_data(6) xor i_data(7) xor old_2_bits(0)) &
-                            (i_data(5) xor i_data(7)) &
-                            (i_data(5) xor i_data(6) xor i_data(7)) &
-                            (i_data(4) xor i_data(6)) &
-                            (i_data(4) xor i_data(5) xor i_data(6));
-                                  
-                        old_2_bits(0) <= i_data(0);
-                        old_2_bits(1) <= i_data(1);
-                        
-                    when S2 =>
-                        state <= S3;
-                        encoded_data <= "00000000";
-                        old_2_bits <= old_2_bits;
-                        words_to_process <= words_to_process;
-                        current_address <= current_address;
-                        
-                        o_address <= std_logic_vector(1001 + ushort("00000000" & current_address) + ushort("00000000" & current_address) - 2);
-                        o_done <= '0';
-                        o_en <= '1';
-                        o_we <= '1';
-                        o_data <= encoded_data;
-                        
-                    when S3 =>
-                        state <= S1_WAIT;
-                        encoded_data <= "00000000";
-                        old_2_bits <= old_2_bits;
-                        current_address <= std_logic_vector(1 + ushorter(current_address));
-                        words_to_process <= std_logic_vector(ushorter(words_to_process) - 1);
-                                        
-                        o_address <= "00000000" & std_logic_vector(1 + ushorter(current_address));
-                        o_done <= '0';
-                        o_en <= '1';
-                        o_we <= '0';
-                        o_data <= "00000000";
-                        
-                    when DONE =>
-                        if i_start = '1' then
-                            state <= DONE;
-                            encoded_data <= "00000000";
-                            old_2_bits <= "00";
-                            current_address <= "00000000";
-                            words_to_process <= "00000000";
-                            
-                            o_address <= "00000000" & current_address;
-                            o_done <= '1';
-                            o_en <= '0';
-                            o_we <= '0';
-                            o_data <= "00000000";
-                        else
-                            state <= STAND_BY;
-                            encoded_data <= "00000000";
-                            old_2_bits <= "00";
-                            current_address <= "00000000";
-                            words_to_process <= "00000000";
-                            
-                            o_address <= "00000000" & current_address;
-                            o_done <= '0';
-                            o_en <= '0';
-                            o_we <= '0';
-                            o_data <= "00000000";
-                        end if;                    
-                        
-                end case;
-                
-            end if;
+                    end if;                    
+                    
+            end case;
                                             
         end if;
         
