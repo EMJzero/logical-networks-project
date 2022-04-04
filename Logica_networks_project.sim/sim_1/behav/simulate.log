@@ -1,0 +1,5 @@
+Vivado Simulator 2016.1
+Time resolution is 1 ps
+Failure: Simulation Ended! TEST PASSATO (ENCODE_EXAMPLE)
+Time: 2050 ns  Iteration: 0  Process: /project_tb/test  File: C:/Users/marco/Documents/LNP/Logica_networks_project.srcs/sim_1/imports/LNP/tb_example.vhd
+$finish called at time : 2050 ns : File "C:/Users/marco/Documents/LNP/Logica_networks_project.srcs/sim_1/imports/LNP/tb_example.vhd" Line 112
