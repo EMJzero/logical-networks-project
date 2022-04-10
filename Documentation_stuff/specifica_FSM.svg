@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="695" height="489" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="110.5" cy="140.5" rx="30" ry="30"/>
+	<text x="100.5" y="146.5" font-family="Times New Roman" font-size="20">00</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="587.5" cy="140.5" rx="30" ry="30"/>
+	<text x="577.5" y="146.5" font-family="Times New Roman" font-size="20">11</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="355.5" cy="32.5" rx="30" ry="30"/>
+	<text x="345.5" y="38.5" font-family="Times New Roman" font-size="20">01</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="355.5" cy="263.5" rx="30" ry="30"/>
+	<text x="345.5" y="269.5" font-family="Times New Roman" font-size="20">10</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="110.5" cy="388.5" rx="30" ry="30"/>
+	<text x="66.5" y="394.5" font-family="Times New Roman" font-size="20">Uk-1 Uk-2</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="355.5" cy="388.5" rx="30" ry="30"/>
+	<text x="311.5" y="394.5" font-family="Times New Roman" font-size="20">Uk-1 Uk-2</text>
+	<polygon stroke="black" stroke-width="1" points="328.049,44.601 137.951,128.399"/>
+	<polygon fill="black" stroke-width="1" points="137.951,128.399 147.288,129.747 143.255,120.597"/>
+	<text x="193.5" y="77.5" font-family="Times New Roman" font-size="20">0/11</text>
+	<polygon stroke="black" stroke-width="1" points="137.311,153.96 328.689,250.04"/>
+	<polygon fill="black" stroke-width="1" points="328.689,250.04 323.783,241.982 319.296,250.919"/>
+	<text x="193.5" y="223.5" font-family="Times New Roman" font-size="20">1/11</text>
+	<polygon stroke="black" stroke-width="1" points="382.005,249.448 560.995,154.552"/>
+	<polygon fill="black" stroke-width="1" points="560.995,154.552 551.585,153.882 556.269,162.717"/>
+	<text x="476.5" y="223.5" font-family="Times New Roman" font-size="20">1/10</text>
+	<polygon stroke="black" stroke-width="1" points="560.303,127.839 382.697,45.161"/>
+	<polygon fill="black" stroke-width="1" points="382.697,45.161 387.84,53.07 392.06,44.004"/>
+	<text x="476.5" y="77.5" font-family="Times New Roman" font-size="20">0/10</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 365.413,60.802 A 306.967,306.967 0 0 1 365.413,235.198"/>
+	<polygon fill="black" stroke-width="1" points="365.413,60.802 362.891,69.893 372.479,67.052"/>
+	<text x="383.5" y="153.5" font-family="Times New Roman" font-size="20">0/01</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 346.577,234.868 A 340.394,340.394 0 0 1 346.577,61.132"/>
+	<polygon fill="black" stroke-width="1" points="346.577,234.868 349.369,225.857 339.701,228.409"/>
+	<text x="294.5" y="154.5" font-family="Times New Roman" font-size="20">1/00</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 83.703,153.725 A 22.5,22.5 0 1 1 83.703,127.275"/>
+	<text x="2.5" y="146.5" font-family="Times New Roman" font-size="20">0/00</text>
+	<polygon fill="black" stroke-width="1" points="83.703,127.275 80.17,118.527 74.292,126.618"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 614.297,127.275 A 22.5,22.5 0 1 1 614.297,153.725"/>
+	<text x="660.5" y="146.5" font-family="Times New Roman" font-size="20">1/01</text>
+	<polygon fill="black" stroke-width="1" points="614.297,153.725 617.83,162.473 623.708,154.382"/>
+	<polygon stroke="black" stroke-width="1" points="84.5,84.5 97.867,113.29"/>
+	<text x="42.5" y="75.5" font-family="Times New Roman" font-size="20">reset</text>
+	<polygon fill="black" stroke-width="1" points="97.867,113.29 99.033,103.928 89.963,108.139"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 339.891,414.047 A 135.241,135.241 0 0 1 126.109,414.047"/>
+	<polygon fill="black" stroke-width="1" points="339.891,414.047 331.038,417.307 338.942,423.433"/>
+	<text x="184.5" y="487.5" font-family="Times New Roman" font-size="20">Uk/P1k P2k</text>
+</svg>

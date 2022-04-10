@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/marco/Documents/LNP/Logica_networks_project.sim/sim_5/impl/func/project_tb_func_impl.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity project_reti_logiche
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/marco/Documents/LNP/Logica_networks_project.srcs/sim_5/new/tb_multiple_runs.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity project_tb

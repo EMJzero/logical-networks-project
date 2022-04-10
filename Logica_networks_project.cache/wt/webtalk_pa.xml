@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<!--The data in this file is primarily intended for consumption by Xilinx tools.
+The structure and the elements are likely to change over the next few releases.
+This means code written to parse this file will need to be revisited each subsequent release.-->
+<application name="pa" timeStamp="Sun Apr 10 11:04:00 2022">
+<section name="Project Information" visible="false">
+<property name="ProjectID" value="a791b9dbb18143688167c9ce5cdd75a5" type="ProjectID"/>
+<property name="ProjectIteration" value="13" type="ProjectIteration"/>
+</section>
+<section name="PlanAhead Usage" visible="true">
+<item name="Project Data">
+<property name="SrcSetCount" value="1" type="SrcSetCount"/>
+<property name="ConstraintSetCount" value="1" type="ConstraintSetCount"/>
+<property name="DesignMode" value="RTL" type="DesignMode"/>
+<property name="SynthesisStrategy" value="Vivado Synthesis Defaults" type="SynthesisStrategy"/>
+<property name="ImplStrategy" value="Vivado Implementation Defaults" type="ImplStrategy"/>
+</item>
+<item name="Java Command Handlers">
+<property name="AddSources" value="5" type="JavaHandler"/>
+<property name="CoreView" value="2" type="JavaHandler"/>
+<property name="CreateBlockDesign" value="1" type="JavaHandler"/>
+<property name="EditDelete" value="5" type="JavaHandler"/>
+<property name="EditRedo" value="34" type="JavaHandler"/>
+<property name="EditSimulationSets" value="5" type="JavaHandler"/>
+<property name="EditUndo" value="113" type="JavaHandler"/>
+<property name="ExportSchematic" value="1" type="JavaHandler"/>
+<property name="FilePrintCmdHandler" value="3" type="JavaHandler"/>
+<property name="MakeActiveSimSet" value="7" type="JavaHandler"/>
+<property name="NewProject" value="3" type="JavaHandler"/>
+<property name="OpenProject" value="13" type="JavaHandler"/>
+<property name="ProjectSettingsCmdHandler" value="6" type="JavaHandler"/>
+<property name="ProjectSummary" value="3" type="JavaHandler"/>
+<property name="ReportDRC" value="1" type="JavaHandler"/>
+<property name="RunImplementation" value="14" type="JavaHandler"/>
+<property name="RunSchematic" value="10" type="JavaHandler"/>
+<property name="RunSynthesis" value="25" type="JavaHandler"/>
+<property name="SaveFileProxyHandler" value="8" type="JavaHandler"/>
+<property name="SaveLayoutAs" value="2" type="JavaHandler"/>
+<property name="ShowView" value="19" type="JavaHandler"/>
+<property name="SimulationClose" value="51" type="JavaHandler"/>
+<property name="SimulationRun" value="103" type="JavaHandler"/>
+<property name="ToggleViewNavigator" value="1" type="JavaHandler"/>
+<property name="ToolsOptions" value="4" type="JavaHandler"/>
+<property name="ToolsTemplates" value="1" type="JavaHandler"/>
+<property name="ViewLayoutCmd" value="8" type="JavaHandler"/>
+<property name="ViewTaskImplementation" value="3" type="JavaHandler"/>
+<property name="ViewTaskRTLAnalysis" value="2" type="JavaHandler"/>
+<property name="ViewTaskSynthesis" value="6" type="JavaHandler"/>
+<property name="ZoomFit" value="7" type="JavaHandler"/>
+<property name="ZoomOut" value="13" type="JavaHandler"/>
+</item>
+<item name="Gui Resources Info">
+<property name="PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, Hierarchy Update" value="1" type="GuiResourceData"/>
+<property name="PAResourceCommand.PACommandNames_MAKE_ACTIVE_SIMSET, Make Active" value="1" type="GuiResourceData"/>
+<property name="PAResourceCommand.PACommandNames_SIMULATION_RESET, Reset Simulation" value="1" type="GuiResourceData"/>
+<property name="PAResourceCommand.PACommandNames_SIMULATION_RUN, Run Simulation" value="1" type="GuiResourceData"/>
+<property name="PAResourceCommand.PACommandNames_SIMULATION_RUN_POST_SYNTHESIS_FUNCTIONAL, Run Post-Synthesis Functional Simulation" value="2" type="GuiResourceData"/>
+<property name="PAResourceCommand.PACommandNames_SIMULATION_RUN_POST_SYNTHESIS_TIMING, Run Post-Synthesis Timing Simulation" value="2" type="GuiResourceData"/>
+<property name="PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, [root, Simulation Sources, sim_4, project_tb - projecttb (tb_temp.vhd" value="1" type="GuiResourceData"/>
+<property name="PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, [root, Simulation Sources, sim_4], 8, true, false, false, false, true, false" value="1" type="GuiResourceData"/>
+<property name="PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, [root, Simulation Sources, sim_generator, project_tb - projecttb (gen_testbench_no_reset.vhd" value="1" type="GuiResourceData"/>
+<property name="PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, [, Simulation, Run Simulation], 11, false" value="4" type="GuiResourceData"/>
+<property name="PAResourceItoN.LogMonitor_MONITOR, 122, 54, false, false, false, false, true" value="1" type="GuiResourceData"/>
+<property name="PAResourceItoN.LogMonitor_MONITOR, 202, 60" value="1" type="GuiResourceData"/>
+<property name="PAResourceOtoP.PAViews_DEVICE, Device" value="1" type="GuiResourceData"/>
+<property name="PAResourceQtoS.SrcMenu_IP_HIERARCHY, IP Hierarchy" value="1" type="GuiResourceData"/>
+<property name="PAResourceTtoZ.TaskBanner_CLOSE, (String" value="2" type="GuiResourceData"/>
+<property name="RDIResource.BaseDialog_OK, OK" value="3" type="GuiResourceData"/>
+<property name="RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, (String" value="1" type="GuiResourceData"/>
+<property name="RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, report_utilization, true" value="1" type="GuiResourceData"/>
+<property name="RDIResource.GraphicalView_ZOOM_FIT, Waveform Viewer_zoom_fit" value="4" type="GuiResourceData"/>
+<property name="RDIResourceCommand.RDICommands_COPY, Copy" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 150, 278" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 154, 313, false, false, false, true, false" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 178, 307" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 182, 115" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 191, 284" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 202, 331" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 244, 339" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 246, 170" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 254, 387" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 308, 387" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 318, 268" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 323, 297" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 326, 288" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 342, 318" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 386, 330" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 386, 330, false, false, false, false, true" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 406, 357" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 494, 313" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 601, 355, false, false, false, true, false" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 626, 330" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 662, 367" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 666, 365" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 672, 338" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 689, 362" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 690, 227" value="1" type="GuiResourceData"/>
+<property name="encoder.vhd, 727, 359" value="1" type="GuiResourceData"/>
+<property name="gen_testbench_no_reset.vhd, 202, 75" value="1" type="GuiResourceData"/>
+<property name="tb_temp.vhd, 154, 99" value="1" type="GuiResourceData"/>
+<property name="tb_temp.vhd, 324, 183" value="1" type="GuiResourceData"/>
+</item>
+<item name="Other">
+<property name="GuiMode" value="10" type="GuiMode"/>
+<property name="BatchMode" value="0" type="BatchMode"/>
+<property name="TclMode" value="8" type="TclMode"/>
+</item>
+</section>
+</application>
+</document>

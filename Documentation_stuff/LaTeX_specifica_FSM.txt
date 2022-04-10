@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (11,-14) circle (3);
+\draw (11,-14) node {$00$};
+\draw [black] (58.7,-14) circle (3);
+\draw (58.7,-14) node {$11$};
+\draw [black] (35.5,-3.2) circle (3);
+\draw (35.5,-3.2) node {$01$};
+\draw [black] (35.5,-26.3) circle (3);
+\draw (35.5,-26.3) node {$10$};
+\draw [black] (11,-38.8) circle (3);
+\draw (11,-38.8) node {$Uk-1\mbox{ }Uk-2$};
+\draw [black] (35.5,-38.8) circle (3);
+\draw (35.5,-38.8) node {$Uk-1\mbox{ }Uk-2$};
+\draw [black] (32.75,-4.41) -- (13.75,-12.79);
+\fill [black] (13.75,-12.79) -- (14.68,-12.92) -- (14.28,-12.01);
+\draw (21.06,-8.08) node [above] {$0/11$};
+\draw [black] (13.68,-15.35) -- (32.82,-24.95);
+\fill [black] (32.82,-24.95) -- (32.33,-24.15) -- (31.88,-25.04);
+\draw (21.03,-20.66) node [below] {$1/11$};
+\draw [black] (38.15,-24.89) -- (56.05,-15.41);
+\fill [black] (56.05,-15.41) -- (55.11,-15.34) -- (55.58,-16.22);
+\draw (49.37,-20.66) node [below] {$1/10$};
+\draw [black] (55.98,-12.73) -- (38.22,-4.47);
+\fill [black] (38.22,-4.47) -- (38.73,-5.26) -- (39.16,-4.35);
+\draw (49.34,-8.08) node [above] {$0/10$};
+\draw [black] (36.491,-6.03) arc (16.50279:-16.50279:30.697);
+\fill [black] (36.49,-6.03) -- (36.24,-6.94) -- (37.2,-6.66);
+\draw (38.26,-14.75) node [right] {$0/01$};
+\draw [black] (34.608,-23.437) arc (-165.21467:-194.78533:34.039);
+\fill [black] (34.61,-23.44) -- (34.89,-22.54) -- (33.92,-22.79);
+\draw (32.98,-14.75) node [left] {$1/00$};
+\draw [black] (8.32,-15.323) arc (324:36:2.25);
+\draw (3.75,-14) node [left] {$0/00$};
+\fill [black] (8.32,-12.68) -- (7.97,-11.8) -- (7.38,-12.61);
+\draw [black] (61.38,-12.677) arc (144:-144:2.25);
+\draw (65.95,-14) node [right] {$1/01$};
+\fill [black] (61.38,-15.32) -- (61.73,-16.2) -- (62.32,-15.39);
+\draw [black] (8.4,-8.4) -- (9.74,-11.28);
+\draw (6.05,-7.88) node [above] {$reset$};
+\fill [black] (9.74,-11.28) -- (9.85,-10.34) -- (8.95,-10.76);
+\draw [black] (33.939,-41.355) arc (-37.77944:-142.22056:13.524);
+\fill [black] (33.94,-41.35) -- (33.05,-41.68) -- (33.84,-42.29);
+\draw (23.25,-47.09) node [below] {$Uk/P1k\mbox{ }P2k$};
+\end{tikzpicture}
+\end{center}
+
+\end{document}

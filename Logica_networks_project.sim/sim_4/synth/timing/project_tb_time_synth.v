@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.1 (win64) Build 1538259 Fri Apr  8 15:45:27 MDT 2016
-// Date        : Wed Apr 06 22:30:51 2022
+// Date        : Sun Apr 10 10:44:24 2022
 // Host        : Zero running 64-bit major release  (build 9200)
 // Command     : write_verilog -mode timesim -nolib -sdf_anno true -force -file
 //               C:/Users/marco/Documents/LNP/Logica_networks_project.sim/sim_4/synth/timing/project_tb_time_synth.v

@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.1 (win64) Build 1538259 Fri Apr  8 15:45:27 MDT 2016
--- Date        : Wed Apr 06 18:03:47 2022
+-- Date        : Sun Apr 10 10:45:20 2022
 -- Host        : Zero running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -mode funcsim -nolib -force -file
 --               C:/Users/marco/Documents/LNP/Logica_networks_project.sim/sim_4/synth/func/project_tb_func_synth.vhd
